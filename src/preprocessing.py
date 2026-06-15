@@ -1,8 +1,7 @@
 """
 MODUL: OBRADA PODATAKA
-Zadatak: Očisti podatke, radi sa missing values, encoding
 """
-
+import joblib
 import pandas as pd
 import numpy as np
 from sklearn.preprocessing import LabelEncoder
@@ -10,7 +9,18 @@ from sklearn.preprocessing import LabelEncoder
 class DataPreprocessor:
     def __init__(self, df):
         self.df = df.copy()
+        # Odmah preimenujemo kolonu radi lakšeg rada kasnije
+        if 'car_mileage, km' in self.df.columns:
+            self.df = self.df.rename(columns={'car_mileage, km': 'mileage'})
     
+    def clean_horsepower(self):
+        """Konvertuj horsepower u broj (radi se PRE handle_missing_values)"""
+        print("\n=== CLEANING HORSEPOWER ===")
+        if 'horsepower' in self.df.columns:
+            self.df['horsepower'] = self.df['horsepower'].astype(str).str.extract(r'(\d+)').astype(float)
+            print("✓ Horsepower konvertovan u broj")
+        return self
+
     def handle_missing_values(self):
         """Popuni missing vrednosti"""
         print("\n=== HANDLING MISSING VALUES ===")
@@ -29,68 +39,45 @@ class DataPreprocessor:
                 self.df[col] = self.df[col].fillna('Unknown')
                 print(f"✓ {col}: popunjeno sa 'Unknown'")
         
-        print(f"\n✓ Svi missing values uklonjeni!")
-        return self
-    
-    def clean_horsepower(self):
-        """Konvertuj horsepower u broj"""
-        print("\n=== CLEANING HORSEPOWER ===")
-        
-        # Ukloni sve nakon razmaka i "HP"
-        # Iz "106 HP (78 kW)" izvuci samo "106"
-        self.df['horsepower'] = self.df['horsepower'].str.extract(r'(\d+)').astype(float)
-        print("✓ Horsepower konvertovan u broj")
+        print("\n✓ Svi missing values uklonjeni!")
         return self
     
     def remove_outliers(self):
         """Ukloni outliere"""
         print("\n=== REMOVING OUTLIERS ===")
-        
         before = len(self.df)
         
-        # Ukloni mileage > 1 milion km
-        self.df = self.df[self.df['car_mileage, km'] <= 1000000]
-        
-        # Ukloni cene < 100 ili > 100000
-        self.df = self.df[(self.df['price'] >= 100) & (self.df['price'] <= 100000)]
+        if 'mileage' in self.df.columns:
+            self.df = self.df[self.df['mileage'] <= 1000000]
+        if 'price' in self.df.columns:
+            self.df = self.df[(self.df['price'] >= 100) & (self.df['price'] <= 100000)]
         
         after = len(self.df)
         print(f"✓ Uklonjeni redovi: {before - after} (ostalo {after})")
         return self
     
     def encode_categorical(self):
-        """Encoding kategorijskih kolona"""
         print("\n=== ENCODING CATEGORICAL COLUMNS ===")
         
-        categorical_cols = ['A/C', 'fuel', 'car_type', 'type_of_drive', 'gearbox', 'doors', 'color']
+        # 1. Izvuci marku iz 'car_name' (pretpostavljamo format "Marka Model")
+        if 'car_name' in self.df.columns:
+            self.df['brand'] = self.df['car_name'].astype(str).str.split().str[0].str.upper()
+            print("✓ Brand izvučen iz car_name")
         
+        # 2. Encoding
+        categorical_cols = ['A/C', 'fuel', 'car_type', 'type_of_drive', 'gearbox', 'doors', 'color', 'brand']
+        
+        self.label_encoders = {} # Čuvamo encodere da ih koristimo u predict.py
         for col in categorical_cols:
             if col in self.df.columns:
                 le = LabelEncoder()
                 self.df[col] = le.fit_transform(self.df[col].astype(str))
+                self.label_encoders[col] = le # Sačuvaj
                 print(f"✓ {col}: encoded")
         
+        # Čuvamo encodere na disk da bi ih predict.py koristio
+        joblib.dump(self.label_encoders, 'models/label_encoders.joblib')
         return self
     
     def get_data(self):
-        """Vrati čiste podatke"""
         return self.df
-
-
-if __name__ == "__main__":
-    from data_loader import DataLoader
-    
-    loader = DataLoader()
-    df = loader.load()
-    
-    processor = DataPreprocessor(df)
-    df_clean = processor.handle_missing_values() \
-                        .clean_horsepower() \
-                        .remove_outliers() \
-                        .encode_categorical() \
-                        .get_data()
-    
-    print(f"\n=== FINALNI DATASET ===")
-    print(f"Redova: {df_clean.shape[0]}")
-    print(f"Kolona: {df_clean.shape[1]}")
-    print(df_clean.head())
