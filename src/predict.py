@@ -1,13 +1,13 @@
-import joblib
 import pandas as pd
 
-REFERENCE_YEAR = 2024
+from src.utils import REFERENCE_YEAR, load_artifact
+
 
 def predict_car_price(input_data):
-    model = joblib.load('models/best_model.joblib')
-    scaler = joblib.load('models/scaler.joblib')
-    encoders = joblib.load('models/label_encoders.joblib')
-    brand_price = joblib.load('models/brand_price_map.joblib')
+    model = load_artifact('best_model.joblib')
+    scaler = load_artifact('scaler.joblib')
+    encoders = load_artifact('label_encoders.joblib')
+    brand_price = load_artifact('brand_price_map.joblib')
 
     input_data = dict(input_data)
 
