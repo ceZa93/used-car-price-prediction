@@ -12,9 +12,10 @@ import joblib
 from pathlib import Path
 
 class ModelTrainer:
-    def __init__(self, df, target_column='price'):
+    def __init__(self, df, target_column='price', brand_column='brand'):
         self.df = df.copy()
         self.target_column = target_column
+        self.brand_column = brand_column
         self.X_train = None
         self.X_test = None
         self.y_train = None
@@ -22,6 +23,8 @@ class ModelTrainer:
         self.scaler = StandardScaler()
         self.models = {}
         self.results = []
+        self.brand_price_map = None
+        self.brand_global_mean = None
     
     def prepare_data(self):
         print("\n=== PREPARING DATA ===")
@@ -37,6 +40,8 @@ class ModelTrainer:
         print(f"✓ Train set: {len(self.X_train)} redova")
         print(f"✓ Test set: {len(self.X_test)} redova")
 
+        self._encode_brand_by_price()
+
         print("\n=== SCALING FEATURES ===")
         feature_columns = self.X_train.columns
         
@@ -45,6 +50,24 @@ class ModelTrainer:
         print("✓ StandardScaler primenjen (fit na Train setu, transform na Test setu).")
         
         return self
+
+    def _encode_brand_by_price(self):
+        if self.brand_column not in self.X_train.columns:
+            return
+
+        print("\n=== TARGET ENCODING BRENDA (po prosečnoj ceni) ===")
+        self.brand_global_mean = float(self.y_train.mean())
+        self.brand_price_map = self.y_train.groupby(self.X_train[self.brand_column]).mean().to_dict()
+
+        self.X_train = self.X_train.copy()
+        self.X_test = self.X_test.copy()
+        self.X_train[self.brand_column] = (
+            self.X_train[self.brand_column].map(self.brand_price_map).fillna(self.brand_global_mean)
+        )
+        self.X_test[self.brand_column] = (
+            self.X_test[self.brand_column].map(self.brand_price_map).fillna(self.brand_global_mean)
+        )
+        print(f"✓ Brend enkodiran po prosečnoj ceni ({len(self.brand_price_map)} brendova).")
     
     def train_models(self):
         print("\n=== TRAINING MODELS ===")
@@ -101,6 +124,13 @@ class ModelTrainer:
 
         joblib.dump(self.scaler, models_dir / "scaler.joblib")
         print(f"✓ Scaler sačuvan: models/scaler.joblib")
+
+        if self.brand_price_map is not None:
+            joblib.dump(
+                {"map": self.brand_price_map, "global_mean": self.brand_global_mean},
+                models_dir / "brand_price_map.joblib",
+            )
+            print(f"✓ Brand price map sačuvan: models/brand_price_map.joblib")
         
         results_df.to_csv(models_dir / "model_results.csv", index=False)
         return best_model
