@@ -133,6 +133,10 @@ class ModelTrainer:
             print(f"✓ Brand price map sačuvan: models/brand_price_map.joblib")
         
         results_df.to_csv(models_dir / "model_results.csv", index=False)
+
+        from src.predict import generate_model_checksums
+        generate_model_checksums()
+
         return best_model
     
     def show_results(self):

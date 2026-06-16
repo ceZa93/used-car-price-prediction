@@ -1,15 +1,100 @@
+import hashlib
 import joblib
 import pandas as pd
+from pathlib import Path
 
 REFERENCE_YEAR = 2024
 
-def predict_car_price(input_data):
-    model = joblib.load('models/best_model.joblib')
-    scaler = joblib.load('models/scaler.joblib')
-    encoders = joblib.load('models/label_encoders.joblib')
-    brand_price = joblib.load('models/brand_price_map.joblib')
+MODEL_DIR = Path("models")
+MODEL_FILES = {
+    "model": MODEL_DIR / "best_model.joblib",
+    "scaler": MODEL_DIR / "scaler.joblib",
+    "encoders": MODEL_DIR / "label_encoders.joblib",
+    "brand_price": MODEL_DIR / "brand_price_map.joblib",
+}
 
-    input_data = dict(input_data)
+NUMERIC_RANGES = {
+    "year": (1950, REFERENCE_YEAR + 1),
+    "mileage": (0, 2_000_000),
+    "horsepower": (1, 2000),
+    "engine_capacity, cc": (0, 20_000),
+    "seats_amount": (1, 12),
+}
+
+
+def _file_sha256(path: Path) -> str:
+    h = hashlib.sha256()
+    with open(path, "rb") as f:
+        for chunk in iter(lambda: f.read(1 << 16), b""):
+            h.update(chunk)
+    return h.hexdigest()
+
+
+def generate_model_checksums(out_path: Path = MODEL_DIR / "checksums.sha256"):
+    lines = []
+    for label, fpath in MODEL_FILES.items():
+        if fpath.exists():
+            lines.append(f"{_file_sha256(fpath)}  {fpath.name}")
+    out_path.write_text("\n".join(lines) + "\n")
+    print(f"✓ Checksums written to {out_path}")
+
+
+def verify_model_checksums(checksum_path: Path = MODEL_DIR / "checksums.sha256"):
+    if not checksum_path.exists():
+        print(
+            "Warning: no checksums.sha256 found — skipping integrity check. "
+            "Run generate_model_checksums() after training to enable verification."
+        )
+        return
+    expected = {}
+    for line in checksum_path.read_text().splitlines():
+        if line.strip():
+            digest, name = line.split("  ", 1)
+            expected[name] = digest
+    for label, fpath in MODEL_FILES.items():
+        if fpath.name in expected:
+            actual = _file_sha256(fpath)
+            if actual != expected[fpath.name]:
+                raise RuntimeError(
+                    f"Integrity check failed for {fpath.name}: "
+                    f"expected {expected[fpath.name]}, got {actual}. "
+                    "The model file may have been tampered with."
+                )
+
+
+def _validate_input(data: dict) -> dict:
+    validated = {}
+    for key, value in data.items():
+        if value is None:
+            raise ValueError(f"Field '{key}' must not be None.")
+
+        if key in NUMERIC_RANGES:
+            try:
+                num = float(value)
+            except (TypeError, ValueError):
+                raise ValueError(
+                    f"Field '{key}' must be numeric, got {type(value).__name__}: {value!r}"
+                )
+            lo, hi = NUMERIC_RANGES[key]
+            if not (lo <= num <= hi):
+                raise ValueError(
+                    f"Field '{key}' value {num} is outside the allowed range [{lo}, {hi}]."
+                )
+            validated[key] = num
+        else:
+            validated[key] = value
+    return validated
+
+
+def predict_car_price(input_data):
+    verify_model_checksums()
+
+    model = joblib.load(MODEL_FILES["model"])
+    scaler = joblib.load(MODEL_FILES["scaler"])
+    encoders = joblib.load(MODEL_FILES["encoders"])
+    brand_price = joblib.load(MODEL_FILES["brand_price"])
+
+    input_data = _validate_input(dict(input_data))
 
     if 'year' in input_data and 'car_age' not in input_data:
         input_data['car_age'] = REFERENCE_YEAR - int(input_data['year'])
