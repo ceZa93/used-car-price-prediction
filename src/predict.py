@@ -5,7 +5,15 @@ def predict_car_price(input_data):
     model = joblib.load('models/best_model.joblib')
     scaler = joblib.load('models/scaler.joblib')
     encoders = joblib.load('models/label_encoders.joblib')
-    
+    brand_price = joblib.load('models/brand_price_map.joblib')
+
+    # Brend se enkodira po prosečnoj ceni (target encoding iz treninga).
+    if 'brand' in input_data:
+        brand_key = str(input_data['brand']).upper()
+        input_data['brand'] = brand_price['map'].get(brand_key, brand_price['global_mean'])
+        if brand_key not in brand_price['map']:
+            print(f"Upozorenje: brend '{brand_key}' nije viđen u treningu, koristi se prosečna cena.")
+
     for col, value in input_data.items():
         if col in encoders:
             # IZBRIŠI .upper() DA BI KORISTIO TAČNO ONO ŠTO UPIŠEŠ
@@ -20,9 +28,9 @@ def predict_car_price(input_data):
                 input_data[col] = 0
 
     df_input = pd.DataFrame([input_data])
-    df_input = df_input[model.feature_names_in_] 
-    
-    df_scaled = scaler.transform(df_input.values)
+    df_input = df_input[model.feature_names_in_]
+
+    df_scaled = pd.DataFrame(scaler.transform(df_input), columns=model.feature_names_in_)
     return model.predict(df_scaled)[0]
 
 if __name__ == "__main__":

@@ -1,6 +1,7 @@
 import joblib
 import pandas as pd
 import numpy as np
+from pathlib import Path
 from sklearn.preprocessing import LabelEncoder
 
 class DataPreprocessor:
@@ -58,7 +59,10 @@ class DataPreprocessor:
             print("✓ Brand izvučen iz car_name")
         
         # 2. Encoding
-        categorical_cols = ['A/C', 'fuel', 'car_type', 'type_of_drive', 'gearbox', 'doors', 'color', 'brand']
+        # 'brand' se NAMERNO ne label-enkodira ovde: ostaje kao tekst da bi se
+        # kasnije (u ModelTrainer-u) primenilo target encoding po prosečnoj ceni,
+        # čime brend dobija mnogo jači uticaj na predikciju cene.
+        categorical_cols = ['A/C', 'fuel', 'car_type', 'type_of_drive', 'gearbox', 'doors', 'color']
         
         self.label_encoders = {} 
         for col in categorical_cols:
@@ -68,7 +72,10 @@ class DataPreprocessor:
                 self.label_encoders[col] = le # Sačuvaj
                 print(f"✓ {col}: encoded")
         
-        # joblib.dump(self.label_encoders, 'models/label_encoders.joblib')
+        models_dir = Path("models")
+        models_dir.mkdir(exist_ok=True)
+        joblib.dump(self.label_encoders, models_dir / "label_encoders.joblib")
+        print("✓ Label encoders sačuvani: models/label_encoders.joblib")
         return self
     
     def get_data(self):
