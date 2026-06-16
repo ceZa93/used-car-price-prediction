@@ -1,6 +1,3 @@
-"""
-MODUL: TRENIRANJE MODELA
-"""
 import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
@@ -34,14 +31,12 @@ class ModelTrainer:
         X = self.df.drop(columns=[self.target_column])
         y = self.df[self.target_column]
         
-        # 1. Podela podataka (Train/Test)
         self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(
             X, y, test_size=0.2, random_state=42
         )
         print(f"✓ Train set: {len(self.X_train)} redova")
         print(f"✓ Test set: {len(self.X_test)} redova")
 
-        # 2. Skaliranje (NAKON PODELE)
         print("\n=== SCALING FEATURES ===")
         feature_columns = self.X_train.columns
         
@@ -101,11 +96,9 @@ class ModelTrainer:
         models_dir = Path("models")
         models_dir.mkdir(exist_ok=True)
         
-        # Čuvamo model
         joblib.dump(best_model, models_dir / "best_model.joblib")
         print(f"✓ Model sačuvan: models/best_model.joblib")
 
-        # Čuvamo skaler
         joblib.dump(self.scaler, models_dir / "scaler.joblib")
         print(f"✓ Scaler sačuvan: models/scaler.joblib")
         

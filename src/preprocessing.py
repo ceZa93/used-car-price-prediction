@@ -1,6 +1,3 @@
-"""
-MODUL: OBRADA PODATAKA
-"""
 import joblib
 import pandas as pd
 import numpy as np
@@ -9,7 +6,6 @@ from sklearn.preprocessing import LabelEncoder
 class DataPreprocessor:
     def __init__(self, df):
         self.df = df.copy()
-        # Odmah preimenujemo kolonu radi lakšeg rada kasnije
         if 'car_mileage, km' in self.df.columns:
             self.df = self.df.rename(columns={'car_mileage, km': 'mileage'})
     
@@ -25,14 +21,12 @@ class DataPreprocessor:
         """Popuni missing vrednosti"""
         print("\n=== HANDLING MISSING VALUES ===")
         
-        # Numericke kolone - popuni sa median
         numeric_cols = self.df.select_dtypes(include=[np.number]).columns
         for col in numeric_cols:
             if self.df[col].isnull().sum() > 0:
                 self.df[col] = self.df[col].fillna(self.df[col].median())
                 print(f"✓ {col}: popunjeno sa median")
         
-        # Categorical kolone - popuni sa 'Unknown'
         categorical_cols = self.df.select_dtypes(include=['object']).columns
         for col in categorical_cols:
             if self.df[col].isnull().sum() > 0:
@@ -59,7 +53,6 @@ class DataPreprocessor:
     def encode_categorical(self):
         print("\n=== ENCODING CATEGORICAL COLUMNS ===")
         
-        # 1. Izvuci marku iz 'car_name' (pretpostavljamo format "Marka Model")
         if 'car_name' in self.df.columns:
             self.df['brand'] = self.df['car_name'].astype(str).str.split().str[0].str.upper()
             print("✓ Brand izvučen iz car_name")
@@ -67,7 +60,7 @@ class DataPreprocessor:
         # 2. Encoding
         categorical_cols = ['A/C', 'fuel', 'car_type', 'type_of_drive', 'gearbox', 'doors', 'color', 'brand']
         
-        self.label_encoders = {} # Čuvamo encodere da ih koristimo u predict.py
+        self.label_encoders = {} 
         for col in categorical_cols:
             if col in self.df.columns:
                 le = LabelEncoder()
@@ -75,8 +68,7 @@ class DataPreprocessor:
                 self.label_encoders[col] = le # Sačuvaj
                 print(f"✓ {col}: encoded")
         
-        # Čuvamo encodere na disk da bi ih predict.py koristio
-        joblib.dump(self.label_encoders, 'models/label_encoders.joblib')
+        # joblib.dump(self.label_encoders, 'models/label_encoders.joblib')
         return self
     
     def get_data(self):

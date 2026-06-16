@@ -1,7 +1,3 @@
-"""
-MODUL: PREDVIĐANJE CENE (INFERENCIJA)
-Zadatak: Učitaj model, skaler i proceni cenu za novi automobil
-"""
 import joblib
 import pandas as pd
 
@@ -26,25 +22,24 @@ def predict_car_price(input_data):
     df_input = pd.DataFrame([input_data])
     df_input = df_input[model.feature_names_in_] 
     
-    # Pretvori u numpy niz da izbegneš upozorenja o imenima kolona
     df_scaled = scaler.transform(df_input.values)
     return model.predict(df_scaled)[0]
 
 if __name__ == "__main__":
     sample_car = {
-        'brand': 'BMW', 
-        'mileage': 50000,
-        'horsepower': 110,
-        'engine_capacity, cc': 1600.0,
+        'brand': 'TOYOTA', 
+        'mileage': 180000,
+        'horsepower': 95,
+        'engine_capacity, cc': 1500.0,
         'seats_amount': 5.0,
-        'A/C': 'automatic A/C',
-        'fuel': 'diesel',
+        'A/C': 'manual A/C',
+        'fuel': 'petrol + gas',
         'car_type': 'hatchback',
-        'type_of_drive': 'back',
-        'gearbox': 'manual, 6 speeds',
+        'type_of_drive': 'front',
+        'gearbox': 'manual, 5 speeds',
         'doors': '4/5 doors',
-        'car_age': 5,
-        'km_per_year': 18750
+        'car_age': 9,
+        'km_per_year': 20000
     }
     
     try:
