@@ -4,7 +4,7 @@ Regresioni ML model za predikciju cena polovnih automobila na osnovu karakterist
 
 **Cilj:** Predvidjeti kontinualnu vrednost (`price`) na osnovu ulaznih atributa. Target u modelu: `log1p(price)` — log transformacija stabilizuje jako asimetričnu raspodelu cena; predikcije se vraćaju u eure pomoću `expm1`.
 
-**Finalni rezultat:** MAE = **932€** (greška od ±931€ u proseku)
+**Finalni rezultat:** MAE = **932€** (greška od ±932€ u proseku)
 
 ## Karakteristike dataset-a
 
@@ -96,7 +96,6 @@ Ukupno: ~7,900 vozila
 - **Year skaliranje:** `(year - 1980) / (2024 - 1980)` → raspon 0-1
   - 1980 = 0.0 (najstariji), 2024 = 1.0 (najnoviji)
 - **Numeričke kolone:** Očuvan originalni format (MinMaxScaler se primenjuje kasnije)
-- **Brand ekstraktovanje:** Prvi dio iz `car_name` (npr. "Dacia Duster" → "Dacia")
 - **Car_name:** Zadržava se za target encoding
 
 ### 4. **Preprocessing Pipeline**
@@ -146,7 +145,7 @@ Odabira se onaj sa **boljim MAE**.
 | Model | MAE | RMSE | R² | Median AE |
 |-------|-----|------|-----|-----------|
 | Ridge | ~1,200€ | ~2,100€ | 0.72 | - |
-| **Random Forest** | **~950€** | **~1,700€** | **0.80** | ~650€ |
+| **Random Forest** | **~950€** | **~1,700€** | **0.83** | ~566€ |
 | Gradient Boosting | ~1,100€ | ~1,900€ | 0.76 | - |
 | Extra Trees | ~980€ | ~1,750€ | 0.79 | - |
 | Hist Gradient Boosting | ~1,050€ | ~1,850€ | 0.77 | - |
@@ -164,9 +163,9 @@ Odabira se onaj sa **boljim MAE**.
 | Mean Error % | 37.87% |
 
 **Interpretacija:**
-- Model predviđa cijenu sa greškom od **±931€** u proseku
-- Polovina predikcija ima grešku < **547€**
-- 80% varijabilnosti cijena je objašnjeno modelom
+- Model predviđa cijenu sa greškom od **±932€** u proseku
+- Polovina predikcija ima grešku < **566€**
+- 83% varijabilnosti cijena je objašnjeno modelom
 
 ## Instalacija i pokretanje
 
