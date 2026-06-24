@@ -66,7 +66,7 @@ with col1:
     year = st.number_input("Godina proizvodnje", min_value=1980, max_value=2024, value=2015, step=1)
     mileage = st.number_input("Kilometraža (km)", min_value=0, max_value=1000000, value=150000, step=1000)
     horsepower = st.number_input("Konjske snage (KS)", min_value=50, max_value=1000, value=100, step=5)
-    engine = st.number_input("Zapremina motora (cc)", min_value=500, max_value=8000, value=1500, step=100)
+    engine = st.number_input("Zapremina motora (cc)", min_value=600, max_value=8000, value=1500, step=100)
     seats = st.number_input("Broj sedišta", min_value=1, max_value=9, value=5, step=1)
 
 with col2:
