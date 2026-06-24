@@ -1,0 +1,8 @@
+Metric,Value
+Total test samples,1187
+Mean actual price,4403.53 €
+Median actual price,3250.00 €
+Mean predicted price,4090.02 €
+Mean absolute error,931.66 €
+Median absolute error,566.12 €
+Mean error percentage,37.87 %

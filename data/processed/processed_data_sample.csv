@@ -1,0 +1,51 @@
+car_name,year,A/C,seats_amount,horsepower,color,"car_mileage, km","engine_capacity, cc",type_of_drive,doors,fuel,car_type,gearbox,actual_price,predicted_price,error_absolute,error_percent
+Renault Scenic,2004,automatic A/C,5.0,120,gray,153000.0,1900.0,front,4/5 doors,diesel,caravan,"manual, 5 speeds",1700,1213.6299376691109,486.37006233088914,28.61
+Opel Meriva,2004,manual A/C,5.0,101,gray,220000.0,1691.0,front,4/5 doors,diesel,minivan (MPV),"manual, 5 speeds",2400,2014.73561028242,385.2643897175799,16.05
+Volkswagen Golf 6,2009,manual A/C,5.0,79,white,185000.0,1390.0,front,2/3 doors,petrol,hatchback,"manual, 5 speeds",5000,5172.36168297217,172.36168297216955,3.45
+Fiat Croma,2008,automatic A/C,5.0,150,gray,244000.0,1910.0,front,4/5 doors,diesel,caravan,"manual, 6 speeds",2750,2732.52489702192,17.47510297808003,0.64
+Citroen C3 Picasso,2014,automatic A/C,2.0,92,red,284321.0,1598.0,front,4/5 doors,diesel,minivan (MPV),"manual, 5 speeds",4250,5387.025731577289,1137.0257315772888,26.75
+Audi A3,2007,automatic A/C,5.0,105,gray,165000.0,1896.0,front,4/5 doors,diesel,limousine,"manual, 5 speeds",4200,4535.429099208836,335.4290992088363,7.99
+Citroen C5,2005,automatic A/C,5.0,136,teget,144800.0,2000.0,front,4/5 doors,diesel,limousine,"manual, 6 speeds",1750,2371.1550601136296,621.1550601136296,35.49
+Audi Q5,2014,automatic A/C,5.0,165,silver,143000.0,1970.0,4x4,4/5 doors,diesel,suv,automatic,18400,15799.65634642331,2600.3436535766905,14.13
+Renault Clio,2015,automatic A/C,5.0,90,gray,86000.0,900.0,front,4/5 doors,petrol,hatchback,"manual, 6 speeds",7000,7815.1164033301075,815.1164033301075,11.64
+Audi A4,2006,automatic A/C,5.0,170,gray,264000.0,1986.0,front,4/5 doors,diesel,caravan,"manual, 6 speeds",4000,4155.29587596429,155.29587596428973,3.88
+Dacia Duster,2017,manual A/C,5.0,110,brown,124534.0,1461.0,front,4/5 doors,diesel,suv,"manual, 6 speeds",13999,10881.665709519364,3117.334290480636,22.27
+Citroen C4 Cactus,2019,no A/C,5.0,102,gray,170000.0,1498.0,front,4/5 doors,diesel,hatchback,"manual, 6 speeds",10500,10186.29293634272,313.70706365728074,2.99
+Peugeot 207,2006,automatic A/C,5.0,90,black,199107.0,1560.0,front,4/5 doors,diesel,hatchback,"manual, 5 speeds",2800,2592.9744945348266,207.0255054651734,7.39
+Seat Leon,2010,manual A/C,5.0,125,white,176000.0,1390.0,front,4/5 doors,petrol,hatchback,"manual, 6 speeds",4400,4499.62868098069,99.62868098068975,2.26
+Opel Insignia,2010,manual A/C,5.0,131,black,262000.0,2000.0,front,4/5 doors,diesel,hatchback,"manual, 6 speeds",5250,5616.273075015844,366.27307501584437,6.98
+Audi A1,2012,automatic A/C,5.0,86,black,125225.0,1197.0,front,4/5 doors,petrol,hatchback,"manual, 5 speeds",7700,6830.1729478213865,869.8270521786135,11.3
+Opel Astra F,1997,manual A/C,5.0,75,gray,160000.0,1600.0,front,4/5 doors,petrol,hatchback,"manual, 5 speeds",1200,485.46317786170226,714.5368221382978,59.54
+Peugeot 206,2002,manual A/C,5.0,68,green,260000.0,1400.0,front,4/5 doors,diesel,limousine,"manual, 5 speeds",1500,1084.0476449794576,415.9523550205424,27.73
+Mercedes E 220,2001,manual A/C,5.0,143,teget,480000.0,2148.0,back,4/5 doors,diesel,limousine,automatic,1550,1926.5479392400741,376.54793924007413,24.29
+Peugeot 207,2010,manual A/C,5.0,95,white,108000.0,1397.0,front,2/3 doors,petrol,hatchback,"manual, 5 speeds",3250,3441.8876365085894,191.88763650858937,5.9
+BMW 520,2015,automatic A/C,5.0,190,white,202000.0,2000.0,back,4/5 doors,diesel,limousine,automatic,16500,17513.094492773358,1013.0944927733581,6.14
+Renault Kadjar,2015,automatic A/C,5.0,131,black,188607.0,1590.0,4x4,4/5 doors,diesel,suv,"manual, 6 speeds",12990,11712.962657208365,1277.0373427916347,9.83
+Audi A4,2002,manual A/C,5.0,131,black,1000.0,1900.0,front,4/5 doors,diesel,limousine,"manual, 5 speeds",2550,2441.9012281253245,108.09877187467555,4.24
+Volkswagen Caddy,2009,manual A/C,2.0,79,gray,206000.0,1960.0,front,4/5 doors,diesel,pickup,"manual, 5 speeds",4599,4579.079047566777,19.920952433222737,0.43
+Lancia Kappa,1999,automatic A/C,5.0,155,blue,105000.0,2000.0,front,4/5 doors,petrol,limousine,automatic,100,2144.280366131522,2044.280366131522,2044.28
+Jeep Cherokee,1999,manual A/C,5.0,113,black,324000.0,2500.0,4x4,4/5 doors,diesel,suv,"manual, 5 speeds",7000,5095.268719084847,1904.7312809151526,27.21
+BMW 520,2006,automatic A/C,5.0,163,gray,304000.0,1995.0,back,4/5 doors,diesel,caravan,automatic,5490,5228.945475789785,261.0545242102153,4.76
+Zastava 101,1983,no A/C,5.0,54,brown,97955.0,1116.0,front,2/3 doors,petrol,coupe,"manual, 4 speeds",1250,812.5650171356494,437.43498286435056,34.99
+Peugeot 1007,2005,manual A/C,4.0,68,gray,230000.0,1398.0,front,2/3 doors,diesel,minivan (MPV),"manual, 5 speeds",1900,1728.8571543774121,171.14284562258786,9.01
+Fiat Panda,2009,manual A/C,4.0,60,black,125195.0,1242.0,front,4/5 doors,petrol,hatchback,"manual, 5 speeds",3800,3296.0233677589276,503.97663224107237,13.26
+Fiat Doblo,2002,no A/C,5.0,102,gray,270000.0,1600.0,front,4/5 doors,petrol,minivan (MPV),"manual, 5 speeds",1550,1360.460038559046,189.5399614409539,12.23
+Smart Fortwo,2001,no A/C,2.0,60,black,160000.0,600.0,back,2/3 doors,petrol,hatchback,semi-automatic,1500,1091.5541326731436,408.4458673268564,27.23
+Renault Scenic,2007,automatic A/C,5.0,131,silver,200000.0,1870.0,front,4/5 doors,diesel,limousine,"manual, 6 speeds",1950,2739.073935443074,789.0739354430739,40.47
+Kia Soul,2010,manual A/C,5.0,128,orange,245320.0,1598.0,front,4/5 doors,diesel,minivan (MPV),"manual, 5 speeds",4390,3698.0746403902203,691.9253596097797,15.76
+Volkswagen Passat B5.5,2001,automatic A/C,5.0,105,black,243965.0,1896.0,front,4/5 doors,diesel,limousine,"manual, 5 speeds",2000,2326.3165717072757,326.31657170727567,16.32
+Toyota Yaris,2006,manual A/C,5.0,87,blue,115000.0,1298.0,front,4/5 doors,petrol,hatchback,"manual, 5 speeds",3650,2918.962770711107,731.0372292888928,20.03
+Renault R5,1988,no A/C,5.0,60,gray,247000.0,1387.0,front,2/3 doors,petrol + gas,hatchback,"manual, 5 speeds",550,410.5980485135763,139.40195148642368,25.35
+Renault Megane,2004,manual A/C,5.0,113,blue,287623.0,1600.0,front,2/3 doors,petrol,hatchback,"manual, 5 speeds",1099,1587.4508403312796,488.45084033127955,44.45
+Audi A4,2006,automatic A/C,5.0,143,gray,195000.0,1989.0,4x4,4/5 doors,diesel,caravan,"manual, 6 speeds",4700,4138.337205483794,561.6627945162063,11.95
+Citroen C4 Grand Picasso,2007,automatic A/C,7.0,109,blue,200000.0,1600.0,front,4/5 doors,diesel,minivan (MPV),automatic,950,3734.9717376590356,2784.9717376590356,293.15
+Alfa Romeo 147,2001,manual A/C,5.0,105,red,248510.0,1600.0,front,2/3 doors,petrol,hatchback,"manual, 5 speeds",1500,769.1933259062507,730.8066740937493,48.72
+Volkswagen Touran,2005,automatic A/C,7.0,150,gray,328000.0,2000.0,front,4/5 doors,petrol,minivan (MPV),"manual, 6 speeds",2850,3174.866479480762,324.8664794807619,11.4
+Renault RX,2002,automatic A/C,5.0,102,gray,270000.0,1897.0,4x4,4/5 doors,diesel,suv,"manual, 5 speeds",1250,2112.3907886229463,862.3907886229463,68.99
+Mercedes W123,1982,no A/C,5.0,136,red,140000.0,2300.0,front,4/5 doors,petrol,limousine,"manual, 4 speeds",7600,1825.6773158048452,5774.322684195155,75.98
+Kia Cerato,2004,manual A/C,5.0,113,blue,247618.0,2000.0,front,4/5 doors,diesel,hatchback,"manual, 5 speeds",2150,1994.5738581946503,155.42614180534974,7.23
+Alfa Romeo 147,2003,manual A/C,5.0,120,red,187399.0,1600.0,front,4/5 doors,petrol,hatchback,"manual, 5 speeds",1200,953.8746714765175,246.1253285234825,20.51
+Fiat Multipla,2007,manual A/C,5.0,102,gray,100200.0,1900.0,front,4/5 doors,diesel,minivan (MPV),"manual, 5 speeds",555,2208.478641290259,1653.478641290259,297.92
+Daewoo Matiz,2004,manual A/C,5.0,50,gray,280638.0,800.0,front,4/5 doors,petrol,hatchback,"manual, 5 speeds",300,1139.1919614961757,839.1919614961757,279.73
+Fiat Brava,1996,manual A/C,5.0,103,gray,310800.0,1581.0,front,4/5 doors,petrol + gas,hatchback,"manual, 5 speeds",1000,973.3512837137916,26.648716286208355,2.66
+Lada 1500,2003,no A/C,5.0,75,white,39000.0,1500.0,back,4/5 doors,petrol,caravan,"manual, 5 speeds",160,1736.8119167316945,1576.8119167316945,985.51
