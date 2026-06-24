@@ -38,18 +38,6 @@ class FeatureEngineer(BaseEstimator, TransformerMixin):
         if 'seats_amount' in df.columns:
             df['seats_amount'] = pd.to_numeric(df['seats_amount'], errors='coerce')
 
-        # NAPOMENA: emission_class je IZBAČENA u data_preparation.py jer:
-        # - Target encoding je činio previše dominantnim (30%+ importance)
-        # - Korisnik ne želi da je koristi za određivanje cene
-        # - Nema potrebe da se kreira emission_class_scaled
-
-        # Drži gearbox kao kategoričku - biće target-encoded kasnije!
-
-        # OBRIŠI brand kolonu - redundantna jer je informacija već u car_name!
-        # car_name = "Alfa Romeo 145" (marka + model)
-        # brand = "ALFA" (samo marka - već u car_name)
-        if 'brand' in df.columns:
-            df = df.drop(columns=['brand'])
 
         return df
 
