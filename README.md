@@ -10,14 +10,14 @@ Regresioni ML model za predikciju cena polovnih automobila na osnovu karakterist
 
 **Raw dataset:** 8,413 vozila
 
-| Atribut | Raspon | Napomena |
-|---------|--------|----------|
-| **Cijena** | 100-82,000€ | - |
-| **Godina** | 1960-2024 | - |
-| **Kilometraža** | 1-4.3B km | - |
-| **Konjske snage** | 50-485 KS | - |
-| **Zapremina motora** | 100-10,000 cc | - |
-| **Model automobila** | 100+ modela | - |
+| Atribut | Raspon |
+|---------|--------|
+| **Cijena** | 100-82,000€ |
+| **Godina** | 1960-2024 |
+| **Kilometraža** | 1-4.3B km |
+| **Konjske snage** | 50-485 KS |
+| **Zapremina motora** | 100-10,000 cc |
+| **Model automobila** | 100+ modela |
 
 ## Struktura projekta
 
