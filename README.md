@@ -1,10 +1,10 @@
 # Predikcija cena polovnih automobila — Srpski dataset 2024
 
-Regresioni ML model za predikciju cena polovnih automobila na osnovu karakteristika vozila. Dataset: Srpski automobili (2024) — ~7,900 vozila, 14+ atributa.
+Regresioni ML model za predikciju cena polovnih automobila na osnovu karakteristika vozila. Dataset: Srpski automobili (2024) — ~8400 vozila, 14+ atributa.
 
 **Cilj:** Predvidjeti kontinualnu vrednost (`price`) na osnovu ulaznih atributa. Target u modelu: `log1p(price)` — log transformacija stabilizuje jako asimetričnu raspodelu cena; predikcije se vraćaju u eure pomoću `expm1`.
 
-**Finalni rezultat:** MAE = **931€** (greška od ±931€ u proseku)
+**Finalni rezultat:** MAE = **932€** (greška od ±931€ u proseku)
 
 ## Karakteristike dataset-a
 
@@ -54,11 +54,11 @@ Permutation importance na test skupu:
 | Feature | Važnost (%) | Napomena |
 |---------|-------------|----------|
 | **year** | 52.1% | Najvažniji - starost auta je ključan faktor |
-| **car_name** | 24.0% | Model automobila (Dacia, Alfa, Toyota, itd.) |
-| **gearbox** | 8.1% | Ručni vs automatski menjač |
+| **car_name** | 24.9% | Model automobila (Dacia, Alfa, Toyota, itd.) |
+| **gearbox** | 6.4% | Ručni vs automatski menjač |
 | **horsepower** | 4.3% | Snaga motora u KS |
 | **engine_capacity, cc** | 2.5% | Zapremina motora |
-| Ostali | ~9% | color, fuel, car_type, doors, itd. |
+| Ostali | ~10% | color, fuel, car_type, doors, itd. |
 
 **Objašnjenje:**
 - `year` je dominantan jer je starost automobila **jaki linearni prediktor** cene (koreliacija 0.67)
@@ -157,11 +157,11 @@ Odabira se onaj sa **boljim MAE**.
 
 | Metrika | Vrijednost |
 |---------|-----------|
-| MAE (Mean Absolute Error) | **931€** |
-| RMSE (Root Mean Squared Error) | ~1,650€ |
-| R² (coefficient of determination) | 0.80 |
-| Median AE | **547€** |
-| Mean Error % | 46.33% |
+| MAE (Mean Absolute Error) | **932€** |
+| RMSE (Root Mean Squared Error) | ~1,598€ |
+| R² (coefficient of determination) | 0.838 |
+| Median AE | **566€** |
+| Mean Error % | 37.87% |
 
 **Interpretacija:**
 - Model predviđa cijenu sa greškom od **±931€** u proseku
