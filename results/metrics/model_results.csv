@@ -1,6 +1,6 @@
 model,val_mae,val_rmse,val_r2,best_params
-Extra Trees,968.6808171486219,1819.0987812414637,0.7983066057601379,"{'regressor__model__max_depth': 18, 'regressor__model__min_samples_leaf': 1, 'regressor__model__n_estimators': 500}"
+Extra Trees,968.6808171486219,1819.098781241464,0.7983066057601379,"{'regressor__model__max_depth': 18, 'regressor__model__min_samples_leaf': 1, 'regressor__model__n_estimators': 500}"
 Hist Gradient Boosting,970.3850456764892,1788.3191440182604,0.8050742740590344,"{'regressor__model__learning_rate': 0.05, 'regressor__model__max_depth': None, 'regressor__model__max_iter': 200, 'regressor__model__min_samples_leaf': 40}"
 Gradient Boosting,971.9881831381322,1789.246118134476,0.8048721424275561,"{'regressor__model__learning_rate': 0.05, 'regressor__model__max_depth': 4, 'regressor__model__n_estimators': 400, 'regressor__model__subsample': 0.8}"
-Random Forest,993.0080193180303,1834.6911120582174,0.7948341740022197,"{'regressor__model__max_depth': None, 'regressor__model__min_samples_leaf': 1, 'regressor__model__n_estimators': 400}"
+Random Forest,993.0080193180302,1834.6911120582172,0.7948341740022197,"{'regressor__model__max_depth': None, 'regressor__model__min_samples_leaf': 1, 'regressor__model__n_estimators': 400}"
 Ridge,1282.9770597740958,2262.7798003660023,0.6879216111335669,{'regressor__model__alpha': 0.3}

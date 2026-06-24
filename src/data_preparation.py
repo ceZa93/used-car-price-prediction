@@ -139,16 +139,21 @@ class DataPreparation:
             print("   ⚠️  Price filter: 100 € - 25000 € (izbacujem skupocene > 25k€)")
         if 'car_mileage, km' in self.df.columns:
             masks.append(self.df['car_mileage, km'].between(0, 550000))
+            print("   ⚠️  Mileage filter: 0 - 550000 km")
         if 'horsepower' in self.df.columns:
             # 99% auta ima < 280 KS (raspon 50-500 je premali)
             masks.append(self.df['horsepower'].between(50, 280))
+            print("   ⚠️  Horsepower filter: 50 - 280 KS")
         if 'engine_capacity, cc' in self.df.columns:
             # 99% auta ima < 3000 cc (raspon 500-5000 je premali)
             masks.append(self.df['engine_capacity, cc'].between(500, 3000))
+            print("   ⚠️  Engine capacity filter: 500 - 3000 cc")
         if 'year' in self.df.columns:
             masks.append(self.df['year'].between(1980, self.reference_year))
+            print("   ⚠️  Year filter: 1980 - " + str(self.reference_year))
         if 'seats_amount' in self.df.columns:
             masks.append(self.df['seats_amount'].between(1, 9))
+            print("   ⚠️  Seats amount filter: 1 - 9")
 
         if masks:
             combined_mask = np.logical_and.reduce(masks)
