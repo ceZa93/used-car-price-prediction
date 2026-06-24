@@ -2,7 +2,7 @@
 
 Regresioni ML model za predikciju cena polovnih automobila na osnovu karakteristika vozila. Dataset: Srpski automobili (2024) — ~8400 vozila, 14+ atributa.
 
-**Cilj:** Predvidjeti kontinualnu vrednost (`price`) na osnovu ulaznih atributa. Target u modelu: `log1p(price)` — log transformacija stabilizuje jako asimetričnu raspodelu cena; predikcije se vraćaju u eure pomoću `expm1`.
+**Cilj:** Predvidjeti kontinualnu vrednost (`price`) na osnovu ulaznih atributa
 
 **Finalni rezultat:** MAE = **932€** (greška od ±932€ u proseku)
 
@@ -197,7 +197,7 @@ streamlit run app/ui.py
 
 **Korisnik bira:**
 - **Model automobila** (npr. "Dacia Duster", "Alfa Romeo 156")
-- Godina proizvodnje (1950-2024)
+- Godina proizvodnje (1980-2024)
 - Kilometraža, konjske snage, zapremina motora
 - Boja, gorivo, menjač, klima, itd.
 
